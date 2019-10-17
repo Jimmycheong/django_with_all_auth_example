@@ -29,6 +29,9 @@ ALLOWED_HOSTS = [
     "*"
 ]
 
+# Please update
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 # Application definition
 
@@ -51,6 +54,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.instagram',
+    'corsheaders',
 ]
 
 
@@ -59,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -77,7 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                
+
                 # `allauth` needs this from django
                 'django.template.context_processors.request',
             ],
@@ -145,10 +151,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-
 #django-allauth stuff
 SITE_ID = 1
 
 
-LOGIN_REDIRECT_URL = "/app"
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 
+
+## CSRF stuff
+CSRF_USE_SESSIONS = True
+CSRF_COOKIE_HTTPONLY = True

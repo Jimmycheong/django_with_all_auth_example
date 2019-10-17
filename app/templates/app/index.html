@@ -1,0 +1,32 @@
+{% load socialaccount %}
+{% providers_media_js %}
+{% load static %}
+{% csrf_token %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+<body>
+	<p> CSRF Token: {% csrf_token %} </p>
+	{{ user }}
+	<p>Hello world!</p>
+
+	<p>Login below</p>
+
+	<a href="{% provider_login_url 'facebook' 'js_sdk' %}">Facebook login</a>
+	<a href="{% provider_login_url 'google' 'js_sdk' %}">Google Login</a>
+
+	<div id="indexComponent"></div>
+
+<script type="text/babel" src="{% static 'js/index.js' %}"></script>
+<script>
+</script>
+</body>
+</html>
